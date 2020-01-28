@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'at#j6ybs-oh^-r46$3eb0*nhx9ckpvox6x8e4oi)h^uvix&z(d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['localhost', '18.208.192.207']
 
@@ -81,7 +81,7 @@ DATABASES = {
         'PASSWORD': 'master12345',
         'HOST': 'database-2.cz7iy75fggfe.us-east-1.rds.amazonaws.com',
         'PORT': '5432',
-        'NAME': 'postgres'
+        'NAME': 'damiandb'
     }
 }
 
