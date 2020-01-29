@@ -78,10 +78,10 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
 #       'NAME': os.path.join(BASE_DIR, 'db.database-2'),
         'USER': 'postgres',
-        'PASSWORD': 'master12345',
+        'PASSWORD': 'master1234',
         'HOST': 'database-1.cc06odijpimz.us-east-1.rds.amazonaws.com',
         'PORT': '5432',
-        'NAME': 'damiandb'
+        'NAME': 'damianaws'
     }
 }
 
