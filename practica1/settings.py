@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+from decouple import config, Csv
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,13 +21,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'at#j6ybs-oh^-r46$3eb0*nhx9ckpvox6x8e4oi)h^uvix&z(d'
-
+#SECRET_KEY = 'at#j6ybs-oh^-r46$3eb0*nhx9ckpvox6x8e4oi)h^uvix&z(d'
+SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
+#DEBUG = False
+DEBUG = config('DEBUG', cast=bool)
 #ALLOWED_HOSTS = ['localhost', '54.82.217.97']
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 # Application definition
 
@@ -49,14 +50,14 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES':('rest_framework.authentication.TokenAuthentication',),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 100
-}
+    }
 
 CORS_ALLOW_METHODS = (
     'DELETE',
     'GET',
     'POST',
     'PUT',
-)
+    )
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -96,11 +97,12 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
 #       'NAME': os.path.join(BASE_DIR, 'db.database-2'),
-        'USER': 'postgres',
-        'PASSWORD': 'master1234',
-        'HOST': 'database-1.cc06odijpimz.us-east-1.rds.amazonaws.com',
-        'PORT': '5432',
-        'NAME': 'damianaws'
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST':  config('DB_HOST'),
+        #'PORT': '5432',
+        'PORT': config('DB_PORT'),
+        'NAME': config('DB_NAME'),
     }
 }
 
