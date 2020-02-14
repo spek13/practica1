@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'Login',
     'Profile',
+    'rest_framework_swagger',
 
 ]
 

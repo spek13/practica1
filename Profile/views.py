@@ -5,6 +5,8 @@ from django.shortcuts import get_object_or_404
 from django.http import Http404
 
 from rest_framework.views import APIView
+#from rest_framework.views import AutoSchema
+from rest_framework.schemas import AutoSchema
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import generics
@@ -28,9 +30,26 @@ from Profile.serializer import Estado_civilS
 
 from Profile.serializer import Example3Serializers
 
+#from django.conf.urls import url
+import coreapi
+from rest_framework.schemas import AutoSchema
+
+
+class ProfileLisViewSchema(AutoSchema):
+    def get_manual_fields(self,path,method):
+        extra_fields = []
+        if method.lower() in ('post','get'):
+            extra_fields = [
+                coreapi.Field('nombre')
+            ]
+        manual_fields =super().get_manual_fields(path,method)
+        return manual_fields + extra_fields
+
 
 
 class ExampleList3(APIView):
+    permission_classes =[]
+    schema = ProfileLisViewSchema()
     #METODO GET PARA SOLICITAR INFO
     def get (self , request , format = None):
         print("Metodo get filter")
@@ -52,6 +71,8 @@ class ExampleList3(APIView):
 
 
 class CiudadList(APIView):
+    permission_classes =[]
+    schema = ProfileLisViewSchema()
     def get (self , request , format = None):
         print("Metodo get filter")
         queryset = CiudadM.objects.filter(delete = False)
@@ -68,6 +89,8 @@ class CiudadList(APIView):
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
 class GeneroList(APIView):
+    permission_classes =[]
+    schema = ProfileLisViewSchema()
     def get (self , request , format = None):
         print("Metodo get filter")
         queryset = GeneroM.objects.filter(delete = False)
@@ -84,6 +107,8 @@ class GeneroList(APIView):
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
 class OcupacionList(APIView):
+    permission_classes =[]
+    schema = ProfileLisViewSchema()
     def get (self , request , format = None):
         print("Metodo get filter")
         queryset = OcupacionM.objects.filter(delete = False)
@@ -100,6 +125,8 @@ class OcupacionList(APIView):
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
 class EstadoList(APIView):
+    permission_classes =[]
+    schema = ProfileLisViewSchema()
     def get (self , request , format = None):
         print("Metodo get filter")
         queryset = EstadoM.objects.filter(delete = False)
@@ -116,6 +143,8 @@ class EstadoList(APIView):
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
 class Estado_civilList(APIView):
+    permission_classes =[]
+    schema = ProfileLisViewSchema()
     def get (self , request , format = None):
         print("Metodo get filter")
         queryset = Estado_civilM.objects.filter(delete = False)
