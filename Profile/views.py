@@ -6,6 +6,7 @@ from django.http import Http404
 
 from rest_framework.views import APIView
 #from rest_framework.views import AutoSchema
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.schemas import AutoSchema
 from rest_framework.response import Response
 from rest_framework import status
@@ -36,6 +37,7 @@ from rest_framework.schemas import AutoSchema
 
 
 class ProfileLisViewSchema(AutoSchema):
+    
     def get_manual_fields(self,path,method):
         extra_fields = []
         if method.lower() in ('post','get'):
@@ -48,7 +50,7 @@ class ProfileLisViewSchema(AutoSchema):
 
 
 class ExampleList3(APIView):
-    permission_classes =[]
+    permission_classes =[IsAuthenticated]
     schema = ProfileLisViewSchema()
     #METODO GET PARA SOLICITAR INFO
     def get (self , request , format = None):
@@ -71,7 +73,7 @@ class ExampleList3(APIView):
 
 
 class CiudadList(APIView):
-    permission_classes =[]
+    permission_classes =[IsAuthenticated]
     schema = ProfileLisViewSchema()
     def get (self , request , format = None):
         print("Metodo get filter")
@@ -89,7 +91,7 @@ class CiudadList(APIView):
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
 class GeneroList(APIView):
-    permission_classes =[]
+    permission_classes =[IsAuthenticated]
     schema = ProfileLisViewSchema()
     def get (self , request , format = None):
         print("Metodo get filter")
@@ -107,7 +109,7 @@ class GeneroList(APIView):
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
 class OcupacionList(APIView):
-    permission_classes =[]
+    permission_classes =[IsAuthenticated]
     schema = ProfileLisViewSchema()
     def get (self , request , format = None):
         print("Metodo get filter")
@@ -125,7 +127,7 @@ class OcupacionList(APIView):
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
 class EstadoList(APIView):
-    permission_classes =[]
+    permission_classes =[IsAuthenticated]
     schema = ProfileLisViewSchema()
     def get (self , request , format = None):
         print("Metodo get filter")
@@ -143,7 +145,7 @@ class EstadoList(APIView):
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
 class Estado_civilList(APIView):
-    permission_classes =[]
+    permission_classes =[IsAuthenticated]
     schema = ProfileLisViewSchema()
     def get (self , request , format = None):
         print("Metodo get filter")
